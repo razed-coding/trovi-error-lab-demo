@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Trovi Error Lab (Local Demo)
 
-## Getting Started
+A simple local demo app to test how Trovi captures frontend and backend errors.
 
-First, run the development server:
+Potential clients can run this project locally, trigger test errors from the UI, and confirm events appear in their Trovi dashboard.
+
+## What this demo does
+
+- Provides a UI to trigger common JavaScript errors
+- Triggers async and API/server-side errors
+- Supports manual event capture
+- Supports user context (`identifyUser` / `clearUser`)
+- Shows a local session log of triggered events
+
+## Prerequisites
+
+- Node.js 18+
+- A Trovi account + project API key
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Create local env file:
+
+```bash
+cp .env.local.example .env.local
+```
+
+3. Open `.env.local` and set:
+
+```env
+NEXT_PUBLIC_TROVI_API_KEY=your_real_trovi_api_key
+```
+
+4. Start the app:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [http://localhost:3000](http://localhost:3000)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Connect to your Trovi dashboard
 
-## Learn More
+The demo sends events to Trovi via a local proxy route (`/api/trovi-proxy/api/ingest`) to avoid browser CORS issues.
 
-To learn more about Next.js, take a look at the following resources:
+Your events are forwarded to:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [https://www.trovi.dev](https://www.trovi.dev)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+In the Trovi dashboard, make sure filters are correct:
 
-## Deploy on Vercel
+- Environment (`development` vs `production`)
+- Time range (last 15 min / 1 hour)
+- Correct project/workspace
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Quick test flow
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Trigger **Throw TypeError**
+2. Trigger **Unhandled Promise Rejection**
+3. Trigger **500 Server Error**
+4. Trigger **Capture Manually**
+
+You should see:
+
+- A local log entry in the app
+- Network call to `/api/trovi-proxy/api/ingest`
+- Events in Trovi dashboard after a few seconds
+
+## Security notes
+
+- `.env.local` is gitignored and should never be committed
+- Do not share or commit real API keys
+- If a key is accidentally exposed, rotate it in Trovi
