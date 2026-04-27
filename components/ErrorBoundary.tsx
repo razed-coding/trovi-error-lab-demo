@@ -19,9 +19,9 @@ export class ErrorBoundary extends React.Component<Props, State> {
           source: "ErrorBoundary",
           componentStack: info.componentStack,
         });
-        console.log("[Trovi Demo] ErrorBoundary captured", error.message);
+        console.log("[Femmi Demo] ErrorBoundary captured", error.message);
       })
-      .catch((e) => console.error("[Trovi Demo] Boundary report failed", e));
+      .catch((e) => console.error("[Femmi Demo] Boundary report failed", e));
   }
 
   render() {

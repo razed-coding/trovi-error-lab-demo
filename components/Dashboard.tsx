@@ -18,7 +18,7 @@ type LogItem = {
 
 export function Dashboard() {
   const [log, setLog] = useState<LogItem[]>([]);
-  const [msg, setMsg] = useState("Manual capture from Trovi Error Lab");
+  const [msg, setMsg] = useState("Manual capture from Femmi Error Lab");
   const [user, setUser] = useState("");
   const [toast, setToast] = useState("");
 
@@ -34,16 +34,16 @@ export function Dashboard() {
   const safeCapture = (error: unknown, type: string) => {
     try {
       captureError(error, { trigger: type });
-      console.log("[Trovi Demo] captured", type);
+      console.log("[Femmi Demo] captured", type);
       add({
         at: new Date().toLocaleTimeString(),
         type,
         message: (error as Error).message,
         status: "captured",
       });
-      notify("Error triggered - check Trovi dashboard");
+      notify("Error triggered - check Femmi dashboard");
     } catch (sdkErr) {
-      console.error("[Trovi Demo] capture failed", sdkErr);
+      console.error("[Femmi Demo] capture failed", sdkErr);
       add({
         at: new Date().toLocaleTimeString(),
         type,
@@ -57,7 +57,7 @@ export function Dashboard() {
     <main className="min-h-screen bg-zinc-950 text-zinc-100 p-6">
       <div className="max-w-5xl mx-auto space-y-8">
         <header className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold">Trovi Error Lab</h1>
+          <h1 className="text-3xl font-bold">Femmi Error Lab</h1>
           <span
             className={`px-3 py-1 rounded-full text-sm ${
               initialized
@@ -69,9 +69,9 @@ export function Dashboard() {
           </span>
         </header>
 
-        {!process.env.NEXT_PUBLIC_TROVI_API_KEY && (
+        {!process.env.NEXT_PUBLIC_FEMMI_API_KEY && (
           <div className="p-3 rounded border border-amber-600 bg-amber-950/40 text-amber-300">
-            Missing NEXT_PUBLIC_TROVI_API_KEY in .env.local
+            Missing NEXT_PUBLIC_FEMMI_API_KEY in .env.local
           </div>
         )}
 
@@ -123,7 +123,7 @@ export function Dashboard() {
                   message: "Unhandled rejection test",
                   status: "uncaptured",
                 });
-                notify("Error triggered - check Trovi dashboard");
+                notify("Error triggered - check Femmi dashboard");
               }}
             >
               Unhandled Promise Rejection
@@ -140,7 +140,7 @@ export function Dashboard() {
                     message: data.message,
                     status: "captured",
                   });
-                  notify("Error triggered - check Trovi dashboard");
+                  notify("Error triggered - check Femmi dashboard");
                 } catch (e) {
                   safeCapture(e, "FetchServerError");
                 }
@@ -177,10 +177,10 @@ export function Dashboard() {
                     message: msg,
                     status: "manual",
                   });
-                  console.log("[Trovi Demo] manual event sent");
-                  notify("Error triggered - check Trovi dashboard");
+                  console.log("[Femmi Demo] manual event sent");
+                  notify("Error triggered - check Femmi dashboard");
                 } catch (e) {
-                  console.error("[Trovi Demo] manual capture failed", e);
+                  console.error("[Femmi Demo] manual capture failed", e);
                 }
               }}
             >

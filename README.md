@@ -1,8 +1,8 @@
-# Trovi Error Lab (Local Demo)
+# Femmi Error Lab (Local Demo)
 
-A simple local demo app to test how Trovi captures frontend and backend errors.
+A simple local demo app to test how Femmi captures frontend and backend errors.
 
-Potential clients can run this project locally, trigger test errors from the UI, and confirm events appear in their Trovi dashboard.
+Potential clients can run this project locally, trigger test errors from the UI, and confirm events appear in their Femmi dashboard.
 
 ## What this demo does
 
@@ -15,7 +15,7 @@ Potential clients can run this project locally, trigger test errors from the UI,
 ## Prerequisites
 
 - Node.js 18+
-- A Trovi account + project API key
+- A Femmi account + project API key
 
 ## Setup
 
@@ -34,7 +34,7 @@ cp .env.local.example .env.local
 3. Open `.env.local` and set:
 
 ```env
-NEXT_PUBLIC_TROVI_API_KEY=your_real_trovi_api_key
+NEXT_PUBLIC_FEMMI_API_KEY=your_real_femmi_api_key
 ```
 
 4. Start the app:
@@ -47,15 +47,15 @@ npm run dev
 
 - [http://localhost:3000](http://localhost:3000)
 
-## Connect to your Trovi dashboard
+## Connect to your Femmi dashboard
 
-The demo sends events to Trovi via a local proxy route (`/api/trovi-proxy/api/ingest`) to avoid browser CORS issues.
+The demo sends events to Femmi via a local proxy route (`/api/femmi-proxy/api/ingest`) to avoid browser CORS issues.
 
 Your events are forwarded to:
 
-- [https://www.trovi.dev](https://www.trovi.dev)
+- [https://www.femmi.dev](https://www.femmi.dev)
 
-In the Trovi dashboard, make sure filters are correct:
+In the Femmi dashboard, make sure filters are correct:
 
 - Environment (`development` vs `production`)
 - Time range (last 15 min / 1 hour)
@@ -71,11 +71,11 @@ In the Trovi dashboard, make sure filters are correct:
 You should see:
 
 - A local log entry in the app
-- Network call to `/api/trovi-proxy/api/ingest`
-- Events in Trovi dashboard after a few seconds
+- Network call to `/api/femmi-proxy/api/ingest`
+- Events in Femmi dashboard after a few seconds
 
 ## Security notes
 
 - `.env.local` is gitignored and should never be committed
 - Do not share or commit real API keys
-- If a key is accidentally exposed, rotate it in Trovi
+- If a key is accidentally exposed, rotate it in Femmi

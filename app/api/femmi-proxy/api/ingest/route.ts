@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
 
-const TROVI_INGEST_URL = process.env.TROVI_UPSTREAM_INGEST_URL ?? "https://www.trovi.dev/api/ingest";
+const FEMMI_INGEST_URL =
+  process.env.FEMMI_UPSTREAM_INGEST_URL ?? "https://www.femmi.dev/api/ingest";
 
 export async function POST(request: Request) {
   try {
     const body = await request.text();
     const auth = request.headers.get("authorization") ?? "";
 
-    const upstream = await fetch(TROVI_INGEST_URL, {
+    const upstream = await fetch(FEMMI_INGEST_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,9 +27,9 @@ export async function POST(request: Request) {
       },
     });
   } catch (error) {
-    console.error("[Trovi Demo] Proxy ingest failed", error);
+    console.error("[Femmi Demo] Proxy ingest failed", error);
     return NextResponse.json(
-      { error: true, message: "Trovi proxy request failed" },
+      { error: true, message: "Femmi proxy request failed" },
       { status: 502 }
     );
   }

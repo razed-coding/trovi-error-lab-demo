@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { TroviProvider } from "@/components/TroviProvider";
+import { FemmiProvider } from "@/components/FemmiProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,8 +15,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Trovi Error Lab",
-  description: "Full-stack demo for testing Trovi error capture",
+  title: "Femmi Error Lab",
+  description: "Full-stack demo for testing Femmi error capture",
 };
 
 export default function RootLayout({
@@ -29,7 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-zinc-950 text-zinc-100`}
       >
-        <TroviProvider>{children}</TroviProvider>
+        <FemmiProvider>{children}</FemmiProvider>
       </body>
     </html>
   );
