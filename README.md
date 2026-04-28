@@ -79,3 +79,7 @@ You should see:
 - `.env.local` is gitignored and should never be committed
 - Do not share or commit real API keys
 - If a key is accidentally exposed, rotate it in Femmi
+
+## Monitoring
+
+See `FEMMI_SDK_SETUP.md` for Femmi integration steps.
